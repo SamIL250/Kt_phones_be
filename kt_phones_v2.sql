@@ -32,7 +32,7 @@ CREATE TABLE `addresses` (
   `user_id` int(11) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL, 
   `address_line1` varchar(100) NOT NULL,
   `address_line2` varchar(100) DEFAULT NULL,
   `country` varchar(50) NOT NULL,
