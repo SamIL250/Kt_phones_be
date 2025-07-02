@@ -156,7 +156,7 @@ $checkout_query = http_build_query($checkout_query_params);
                     <input type="hidden" name="tax" value="<?= htmlspecialchars($totals['tax']) ?>">
                     <input type="hidden" name="shipping_cost" value="<?= htmlspecialchars($totals['shipping']) ?>">
                     <input type="hidden" name="total" value="<?= htmlspecialchars($totals['total']) ?>">
-                    <button type="submit" class="w-full text-center bg-blue-500 text-white py-3 block rounded-lg font-bold hover:bg-blue-600 transition-colors">
+                    <button id="checkout-link" type="submit" class="w-full text-center bg-blue-500 text-white py-3 block rounded-lg font-bold hover:bg-blue-600 transition-colors">
                         Proceed to Checkout
                     </button>
                 </form>
@@ -196,7 +196,9 @@ $checkout_query = http_build_query($checkout_query_params);
 
             if (cartItemCount === 0) {
                 summarySection.classList.add('opacity-50', 'pointer-events-none');
-                checkoutLink.href = '#';
+                if (checkoutLink) {
+                    checkoutLink.href = '#';
+                }
             } else {
                 summarySection.classList.remove('opacity-50', 'pointer-events-none');
             }
@@ -276,8 +278,23 @@ $checkout_query = http_build_query($checkout_query_params);
             }
             console.log('Cart remove payload:', payload); // Debug log
             const result = await handleCartAction('remove_item', payload);
-            if (result) {
-                row.remove();
+            // Always remove the row from UI, even if backend says no matching row
+            row.remove();
+            // Check if cart is now empty
+            if (cartTableBody.querySelectorAll('.cart-item-row').length === 0) {
+                cartTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-16">
+                            <p class="text-lg text-gray-500">Your cart is empty.</p>
+                            <a href="store" class="mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">Continue Shopping</a>
+                        </td>
+                    </tr>
+                `;
+                // Optionally, also disable or hide the summary section
+                summarySection.classList.add('opacity-50', 'pointer-events-none');
+                if (checkoutLink) {
+                    checkoutLink.href = '#';
+                }
             }
         });
     });
