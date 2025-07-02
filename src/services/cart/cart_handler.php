@@ -7,6 +7,9 @@ error_reporting(E_ALL);
 session_start();
 require_once '../../../config/config.php';
 require_once './cart_logic.php';
+require_once '../../../vendor/autoload.php'; // If not already included
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 function jsonResponse($success, $message, $data = null) {
     echo json_encode(['success' => $success, 'message' => $message, 'data' => $data]);
@@ -19,8 +22,29 @@ function redirectWithMessage($message, $location = '../../../cart') {
     exit();
 }
 
-$is_logged_in = isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'];
-$customer_id = $is_logged_in ? $_SESSION['customer_id'] : null;
+$key = "gfrewbfiugrwekjfiueg_fewfmy_secrete_key_34rgfrewbfiugrwekjfiueg";
+
+$is_logged_in = false;
+$customer_id = null;
+
+// Check session first
+if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] && isset($_SESSION['customer_id'])) {
+    $is_logged_in = true;
+    $customer_id = $_SESSION['customer_id'];
+} elseif (isset($_COOKIE['customer_token'])) {
+    // Fallback to JWT cookie
+    try {
+        $token = $_COOKIE['customer_token'];
+        $decode = JWT::decode($token, new Key($key, 'HS256'));
+        $customer_id = $decode->customer->customer_id ?? null;
+        if ($customer_id) {
+            $is_logged_in = true;
+        }
+    } catch (Exception $e) {
+        $is_logged_in = false;
+        $customer_id = null;
+    }
+}
 
 $input = json_decode(file_get_contents('php://input'), true);
 $is_ajax = !is_null($input);
@@ -111,12 +135,14 @@ if ($action !== 'remove_item') {
     $existing_item = $existing_item_result ? mysqli_fetch_assoc($existing_item_result) : null;
 }
 
+error_log('user_id: ' . $user_id . ', cart_item_id: ' . $cart_item_id . ', product_id: ' . $product_id . ', is_logged_in: ' . ($is_logged_in ? 'true' : 'false'));
+
 switch ($action) {
     case 'remove_item':
         if ($user_id) { // Logged-in user
             if ($cart_item_id) {
-                $delete_query = mysqli_prepare($conn, "DELETE FROM cart_item WHERE cart_item_id = ? AND cart_id = ?");
-                $delete_query->bind_param('is', $cart_item_id, $cart_id);
+                $delete_query = mysqli_prepare($conn, "DELETE FROM cart_item WHERE cart_item_id = ?");
+                $delete_query->bind_param('i', $cart_item_id);
                 $delete_query->execute();
                 if ($is_ajax && $delete_query->affected_rows === 0) {
                     jsonResponse(false, 'Failed to delete item from cart. (No matching row)');

@@ -52,7 +52,15 @@ $checkout_query = http_build_query($checkout_query_params);
                                         $price = isset($item['unit_price']) ? $item['unit_price'] : 
                                                 ($item['discount_price'] > 0 ? $item['discount_price'] : $item['base_price']);
                                     ?>
-                                        <tr class="cart-item-row" data-product-id="<?= $item['product_id'] ?>" data-variant-id="<?= $item['variant_id'] ?? '' ?>">
+                                        <tr class="cart-item-row" 
+                                            data-product-id="<?= $item['product_id'] ?>" 
+
+                                            
+                                            data-variant-id="<?= $item['variant_id'] ?? '' ?>"
+                                            <?php if ($is_logged_in): ?>
+                                                data-cart-item-id="<?= $item['cart_item_id'] ?>"
+                                            <?php endif; ?>
+                                        >
                                             <td class="py-4 px-2 text-center">
                                                 <img class="border border-gray-200 rounded-md" src="<?= $item['image_urls'] ?>" alt="<?= $item['name'] ?>" width="53" />
                                             </td>
@@ -249,6 +257,27 @@ $checkout_query = http_build_query($checkout_query_params);
                 const price = parseFloat(row.querySelector('.item-total').dataset.price);
                 const itemTotalEl = row.querySelector('.item-total');
                 itemTotalEl.textContent = formatCurrency(price * payload.quantity);
+            }
+        });
+
+        // --- Remove item AJAX for both logged-in and guest ---
+        cartTableBody.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.remove-item-btn');
+            if (!btn) return;
+            e.preventDefault();
+            const row = btn.closest('.cart-item-row');
+            const isLoggedIn = <?= json_encode($is_logged_in ?? false) ?>;
+            let payload = {};
+            if (isLoggedIn) {
+                payload.cart_item_id = row.dataset.cartItemId || btn.form.querySelector('[name="cart_item_id"]').value;
+            } else {
+                payload.product_id = row.dataset.productId || btn.form.querySelector('[name="product_id"]').value;
+                payload.variant_id = row.dataset.variantId || btn.form.querySelector('[name="variant_id"]').value;
+            }
+            console.log('Cart remove payload:', payload); // Debug log
+            const result = await handleCartAction('remove_item', payload);
+            if (result) {
+                row.remove();
             }
         });
     });
