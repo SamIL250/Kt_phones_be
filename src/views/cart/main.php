@@ -259,6 +259,45 @@ $checkout_query = http_build_query($checkout_query_params);
                 const price = parseFloat(row.querySelector('.item-total').dataset.price);
                 const itemTotalEl = row.querySelector('.item-total');
                 itemTotalEl.textContent = formatCurrency(price * payload.quantity);
+
+                // Update the hidden checkout form with new values
+                const checkoutForm = document.querySelector('form[action="./src/services/checkout/checkout_summary.php"]');
+                if (checkoutForm) {
+                    const productInputs = checkoutForm.querySelectorAll('input[name^="products["][name$="][product_id]"]');
+                    let targetIndex = -1;
+
+                    productInputs.forEach(prodInput => {
+                        const name = prodInput.getAttribute('name');
+                        const indexMatch = name.match(/\[(\d+)\]/);
+                        if (indexMatch && prodInput.value === payload.product_id) {
+                            const index = indexMatch[1];
+                            const variantInput = checkoutForm.querySelector(`input[name="products[${index}][variant_id]"]`);
+                            if (variantInput && variantInput.value == payload.variant_id) {
+                                targetIndex = index;
+                            }
+                        }
+                    });
+
+                    if (targetIndex !== -1) {
+                        const quantityInput = checkoutForm.querySelector(`input[name="products[${targetIndex}][quantity]"]`);
+                        if (quantityInput) {
+                            quantityInput.value = payload.quantity;
+                        }
+                    }
+
+                    // Update summary fields in the form
+                    const subtotalInput = checkoutForm.querySelector('input[name="subtotal"]');
+                    const taxInput = checkoutForm.querySelector('input[name="tax"]');
+                    const totalInput = checkoutForm.querySelector('input[name="total"]');
+                    const discountInput = checkoutForm.querySelector('input[name="discount"]');
+                    const shippingInput = checkoutForm.querySelector('input[name="shipping_cost"]');
+
+                    if (subtotalInput) subtotalInput.value = data.subtotal;
+                    if (taxInput) taxInput.value = data.tax;
+                    if (totalInput) totalInput.value = data.total;
+                    if (discountInput) discountInput.value = data.discount;
+                    if (shippingInput) shippingInput.value = data.shipping;
+                }
             }
         });
 
