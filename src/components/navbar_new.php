@@ -68,7 +68,7 @@ if (isset($conn) && $conn) {
             </div>
 
             <!-- Search Bar (centered, always visible) -->
-            <div class="flex-1 flex items-center justify-center px-2 mobile-search-bar">
+            <div class="flex-1 flex items-center justify-center px-2 mobile-search-bar desktop-search-bar">
                 <?php include './src/components/search.php'; ?>
             </div>
 
@@ -346,30 +346,35 @@ if (isset($conn) && $conn) {
     background-color: rgba(59, 130, 246, 0.18) !important; /* blue-500 with more transparency */
 }
 
-/* Desktop search bar: wider and sleeker */
+/* Force desktop search bar to be wide and slim */
 @media (min-width: 1024px) {
-    .mobile-search-bar form,
-    .mobile-search-bar > div > form,
-    #main-navbar .mobile-search-bar form {
+    .desktop-search-bar,
+    .desktop-search-bar > div,
+    .desktop-search-bar form {
         max-width: 600px !important;
         width: 100% !important;
-        min-width: 0;
+        min-width: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
-    .mobile-search-bar input[type="text"],
-    .mobile-search-bar > div > form > input[type="text"],
-    #main-navbar .mobile-search-bar input[type="text"] {
-        height: 2.25rem !important;
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-        font-size: 1.05rem !important;
+    .desktop-search-bar input[type="text"] {
+        height: 2.1rem !important;
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
+        font-size: 0.97rem !important;
+        border-radius: 9999px 0 0 9999px !important;
     }
-    .mobile-search-bar button[type="submit"],
-    .mobile-search-bar > div > form > button[type="submit"],
-    #main-navbar .mobile-search-bar button[type="submit"] {
-        height: 2.25rem !important;
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-        font-size: 1.05rem !important;
+    .desktop-search-bar button[type="submit"] {
+        height: 2.1rem !important;
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
+        font-size: 0.97rem !important;
+        border-radius: 0 9999px 9999px 0 !important;
+    }
+    .desktop-search-bar form {
+        border-radius: 9999px !important;
+        min-height: unset !important;
+        box-shadow: none !important;
     }
 }
 </style>
