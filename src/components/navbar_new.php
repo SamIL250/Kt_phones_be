@@ -119,7 +119,7 @@ if (isset($conn) && $conn) {
                                 <?php
                                 $wishlist_count = 0;
                                 if (isset($is_logged_in) && $is_logged_in && isset($customer_id)) {
-                                    $wishlist_query_str = "SELECT COUNT(wi.item_id) as count FROM wishlists w JOIN wishlist_items wi ON w.wishlist_id = wi.wishlist_id WHERE w.user_id = ?";
+                                    $wishlist_query_str = "SELECT COUNT(wi.wishlist_item_id) as count FROM wishlists w JOIN wishlist_items wi ON w.wishlist_id = wi.wishlist_id WHERE w.user_id = ?";
                                     $wishlist_query = mysqli_prepare($conn, $wishlist_query_str);
                                     if ($wishlist_query) {
                                         mysqli_stmt_bind_param($wishlist_query, "s", $customer_id);
