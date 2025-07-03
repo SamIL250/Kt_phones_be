@@ -101,30 +101,14 @@ async function addToWishlist(productId, userId) {
 }
 
 // Toast notification
+if (typeof window.Notyf !== 'undefined') {
+    window.notyfInstance = window.notyfInstance || new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
+}
 function showToast(message, type = 'info') {
-    const colors = {
-        success: 'linear-gradient(to right, #10b981, #059669)',
-        error: 'linear-gradient(to right, #ef4444, #dc2626)',
-        warning: 'linear-gradient(to right, #f59e0b, #d97706)',
-        info: 'linear-gradient(to right, #3b82f6, #2563eb)'
-    };
-
-            Toastify({
-        text: message,
-        duration: 3000,
-        gravity: "bottom",
-        position: "right",
-        backgroundColor: colors[type],
-                stopOnFocus: true,
-                style: {
-                    borderRadius: "8px",
-                    padding: "12px 16px",
-                    color: "#fff",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)",
-                }
-            }).showToast();
+    if (!window.notyfInstance) return;
+    if (type === 'success') return notyfInstance.success(message);
+    if (type === 'error' || type === 'warning') return notyfInstance.error(message);
+    notyfInstance.open({ type: 'info', message });
 }
 
 // Update cart count

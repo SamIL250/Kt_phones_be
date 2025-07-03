@@ -508,4 +508,15 @@ if ($related_stmt) {
                 showToast('Request failed. Please try again.', 'error');
             });
     }
+
+    // Toast notification
+    if (typeof window.Notyf !== 'undefined') {
+        window.notyfInstance = window.notyfInstance || new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
+    }
+    function showToast(message, type = 'info') {
+        if (!window.notyfInstance) return;
+        if (type === 'success') return notyfInstance.success(message);
+        if (type === 'error' || type === 'warning') return notyfInstance.error(message);
+        notyfInstance.open({ type: 'info', message });
+    }
 </script>

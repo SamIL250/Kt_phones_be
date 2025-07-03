@@ -1,5 +1,3 @@
-
-
 // Modern JavaScript enhancements for KT Phones
 
 // Hide preloader when page is loaded
@@ -90,34 +88,14 @@ function isValidEmail(email) {
 }
 
 // Toast notification system
+if (typeof window.Notyf !== 'undefined') {
+    window.notyfInstance = window.notyfInstance || new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
+}
 function showToast(message, type = 'info') {
-  const toast = document.createElement('div');
-  toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
-
-  const colors = {
-    success: 'bg-green-500 text-white',
-    error: 'bg-red-500 text-white',
-    warning: 'bg-yellow-500 text-white',
-    info: 'bg-blue-500 text-white'
-  };
-
-  toast.className += ` ${colors[type] || colors.info}`;
-  toast.textContent = message;
-
-  document.body.appendChild(toast);
-
-  // Animate in
-  setTimeout(() => {
-    toast.classList.remove('translate-x-full');
-  }, 100);
-
-  // Remove after 3 seconds
-  setTimeout(() => {
-    toast.classList.add('translate-x-full');
-    setTimeout(() => {
-      document.body.removeChild(toast);
-    }, 300);
-  }, 3000);
+    if (!window.notyfInstance) return;
+    if (type === 'success') return notyfInstance.success(message);
+    if (type === 'error' || type === 'warning') return notyfInstance.error(message);
+    notyfInstance.open({ type: 'info', message });
 }
 
 // Lazy loading for images

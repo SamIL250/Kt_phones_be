@@ -11,11 +11,10 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sriracha&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <style>
         * {
-
             font-family: "Poppins";
         }
     </style>
@@ -26,24 +25,10 @@ session_start();
     if (isset($_SESSION['notification'])) {
     ?>
         <script>
-            Toastify({
-                text: "⚠️<?= $_SESSION['notification'] ?>",
-                className: "info",
-                close: true,
-                stopOnFocus: true,
-                backgroundColor: "linear-gradient(to right, #F97316, #EA580C)", // Dark blue gradient
-                className: "warning-toast ",
-                stopOnFocus: true, // Prevents dismissing on hover
-                style: {
-                    borderRadius: "8px",
-                    padding: "12px 16px",
-                    color: "#fff",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)",
-                    borderLeft: "5px solid #C2410C" // A left border for emphasis
-                }
-            }).showToast();
+            if (window.Notyf) {
+                (window.notyfInstance = window.notyfInstance || new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } }));
+                notyfInstance.error("⚠️<?= $_SESSION['notification'] ?>");
+            }
         </script>
     <?php
     }

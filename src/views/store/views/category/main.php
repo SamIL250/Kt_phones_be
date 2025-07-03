@@ -498,27 +498,14 @@ if ($current_category_slug) {
             });
     }
 
-    // A simple toast function (requires a toast container in your main layout)
-    // This is a placeholder. Use your existing Toastify or create a simple one.
+    // Toast notification
+    if (typeof window.Notyf !== 'undefined') {
+        window.notyfInstance = window.notyfInstance || new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
+    }
     function showToast(message, type = 'info') {
-        const toastContainer = document.getElementById('toast-container');
-        if (!toastContainer) {
-            console.warn('Toast container not found!');
-            alert(message); // Fallback
-            return;
-        }
-
-        const bgColor = type === 'success' ? 'bg-green-500' : (type === 'error' ? 'bg-red-500' : 'bg-blue-500');
-
-        const toast = document.createElement('div');
-        toast.className = `p-4 rounded-lg text-white shadow-lg animate-fade-in-down ${bgColor}`;
-        toast.textContent = message;
-
-        toastContainer.appendChild(toast);
-
-        setTimeout(() => {
-            toast.classList.add('animate-fade-out-up');
-            setTimeout(() => toast.remove(), 500);
-        }, 3000);
+        if (!window.notyfInstance) return;
+        if (type === 'success') return notyfInstance.success(message);
+        if (type === 'error' || type === 'warning') return notyfInstance.error(message);
+        notyfInstance.open({ type: 'info', message });
     }
 </script>
