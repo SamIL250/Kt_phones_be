@@ -351,30 +351,44 @@ if (isset($conn) && $conn) {
     .desktop-search-bar,
     .desktop-search-bar > div,
     .desktop-search-bar form {
-        max-width: 600px !important;
+        max-width: 400px !important;
         width: 100% !important;
         min-width: 0 !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        background: white !important;
+        min-height: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding: 0 !important;
     }
     .desktop-search-bar input[type="text"] {
-        height: 2.1rem !important;
-        padding-top: 0.2rem !important;
-        padding-bottom: 0.2rem !important;
+        height: 1.6rem !important;
+        line-height: 1.6rem !important;
+        min-height: 0 !important;
+        box-sizing: border-box !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         font-size: 0.97rem !important;
         border-radius: 9999px 0 0 9999px !important;
     }
     .desktop-search-bar button[type="submit"] {
-        height: 2.1rem !important;
-        padding-top: 0.2rem !important;
-        padding-bottom: 0.2rem !important;
+        height: 1.6rem !important;
+        line-height: 1.6rem !important;
+        min-height: 0 !important;
+        box-sizing: border-box !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         font-size: 0.97rem !important;
         border-radius: 0 9999px 9999px 0 !important;
+        cursor: pointer !important;
     }
     .desktop-search-bar form {
         border-radius: 9999px !important;
         min-height: unset !important;
         box-shadow: none !important;
+        /* background: white !important; */
+        padding: 8px !important;
     }
 }
 </style>
