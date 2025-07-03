@@ -306,86 +306,30 @@ if (empty($products_summary)) {
                         </div>
                         <?php endif; ?>
 
-                        <!-- Delivery Type -->
+                        <!-- Payment Method -->
                         <div class="mb-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Delivery Type</h3>
-
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Payment Method</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="border border-gray-300 p-4">
-                                    <label class="flex items-start gap-3 cursor-pointer">
-                                        <input type="radio" name="delivery_type" value="free" class="mt-1">
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="text-gray-500 font-bold">Free Delivery</span>
-                                                <span class="font-bold text-gray-600">0.00 Frw</span>
-                                            </div>
-                                            <?php
-                                            $start_date = date('M d', strtotime('+5 days'));
-                                            $end_date = date('M d', strtotime('+7 days'));
-                                            ?>
-                                            <p class="text-sm text-gray-500 mt-1">Est. delivery: <?= $start_date ?> - <?= $end_date ?></p>
-                                            <p class="text-sm text-gray-500">Get Free Shipped products in 7 days!</p>
-                                        </div>
-                                    </label>
+                                <div class="flex items-center gap-3 border border-gray-300 p-4 rounded">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-credit-card text-blue-500"></i>
+                                        Card
+                                        <span class="flex items-center gap-1 ml-2 text-lg">
+                                            <i class="fab fa-cc-visa" title="Visa"></i>
+                                            <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+                                            <i class="fab fa-cc-amex" title="Amex"></i>
+                                            <i class="fab fa-cc-discover" title="Discover"></i>
+                                        </span>
+                                    </span>
                                 </div>
-
-                                <div class="border border-gray-300 p-4">
-                                    <label class="flex items-start gap-3 cursor-pointer">
-                                        <input type="radio" name="delivery_type" value="two-day" class="mt-1">
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-bold text-gray-500">Two days Delivery</span>
-                                                <span class="font-bold text-gray-600">5000.00 Frw</span>
-                                            </div>
-                                            <?php
-                                            $start_date = date('M d', strtotime('+1 days'));
-                                            $end_date = date('M d', strtotime('+2 days'));
-                                            ?>
-                                            <p class="text-sm text-gray-500 mt-1">Est. delivery: <?= $start_date ?> - <?= $end_date ?></p>
-                                            <p class="text-sm text-gray-500">Everything Arrive with minimum Delivery fee</p>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <div class="border border-gray-300 p-4">
-                                    <label class="flex items-start gap-3 cursor-pointer">
-                                        <input type="radio" name="delivery_type" value="standard" class="mt-1">
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-bold text-gray-500">Standard Delivery</span>
-                                                <span class="font-bold text-gray-600">3000.00 Frw</span>
-                                            </div>
-                                            <?php
-                                            $start_date = date('M d', strtotime('+3 days'));
-                                            $end_date = date('M d', strtotime('+5 days'));
-                                            ?>
-                                            <p class="text-sm text-gray-500 mt-1">Est. delivery: <?= $start_date ?> - <?= $end_date ?></p>
-                                            <p class="text-sm text-gray-500">Get cheap delivery with economy Delivery</p>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <div class="border-2 border-blue-500 p-4 bg-blue-50">
-                                    <label class="flex items-start gap-3 cursor-pointer">
-                                        <input type="radio" name="delivery_type" value="one-day" class="mt-1" checked>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-bold text-gray-500">One-day Delivery</span>
-                                                <span class="font-bold text-gray-600">10,000.00 Frw</span>
-                                            </div>
-                                            <div class="flex items-center gap-2 mt-1">
-                                                <?php
-                                                $start_date = date('M d', strtotime('+1 days'));
-                                                $end_date = date('M d', strtotime('+1 days'));
-                                                ?>
-                                                <p class="text-sm text-gray-500 mt-1">Est. delivery: <?= $start_date ?></p>
-                                                <span class="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded font-medium">POPULAR</span>
-                                            </div>
-                                            <p class="text-sm text-gray-500">Highest priority Delivery in the lowest cost.</p>
-                                        </div>
-                                    </label>
+                                <div class="flex items-center gap-3 border border-gray-300 p-4 rounded">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-mobile-alt text-green-500"></i>
+                                        Mobile Money
+                                    </span>
                                 </div>
                             </div>
+                            <p class="text-xs text-gray-500 mt-2">You will be redirected to a secure payment page to complete your order. All payment methods are handled there.</p>
                         </div>
 
                         <!-- Hidden fields for shipping cost -->

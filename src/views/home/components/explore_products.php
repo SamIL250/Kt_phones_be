@@ -85,7 +85,7 @@ if (!function_exists('getProductRating')) {
                     $stars = round(isset($rating['avg_rating']) ? $rating['avg_rating'] : 0);
                     ?>
                     <div class="flex items-center justify-center gap-1 mb-1">
-                        <span class="text-lg font-bold text-blue-400"><?php echo $product['discount_price'] ? '$' . number_format($product['discount_price']) : '$' . number_format($product['base_price']); ?></span>
+                        <span class="text-lg font-bold text-blue-400"><?php echo $product['discount_price'] ? ' Frw ' . number_format($product['discount_price']) : ' Frw ' . number_format($product['base_price']); ?></span>
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <i class="bi <?php echo ($i <= $stars ? 'bi-star-fill text-yellow-400' : 'bi-star text-gray-300'); ?>"></i>
                         <?php endfor; ?>

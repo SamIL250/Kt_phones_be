@@ -496,7 +496,7 @@ if ($related_stmt) {
                             itemElement.style.transform = 'translateX(20px)';
                             setTimeout(() => {
                                 location.reload();
-                            }, 500);
+                            }, 500);    
                         }
                     }
                 } else {

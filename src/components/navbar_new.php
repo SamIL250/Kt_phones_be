@@ -48,7 +48,7 @@ if (isset($conn) && $conn) {
 <!-- Announcement Bar -->
 <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center py-2 px-4 shadow-md">
     <p class="text-sm font-medium animate-pulse">
-        🚀 Now shipping internationally! Free delivery on orders over $100.
+        Now shipping internationally! Free delivery on orders over $100.
     </p>
 </div>
 

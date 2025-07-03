@@ -6,7 +6,7 @@ if (!$is_logged_in) {
         <!-- 3D CTA Card -->
         <div class="w-full md:w-1/2 flex justify-center md:justify-start">
             <div class="member-cta-3d relative group transition-transform duration-300 will-change-transform" style="perspective: 1200px;">
-                <img src="./src/assets/images/light_30.png" alt="observe-card Become a Member Illustration" class="max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain member-cta-anim opacity-0 translate-y-8 transition-all duration-700" />
+                <img src="./src/assets/images/41.png" alt="observe-card Become a Member Illustration" class="max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain member-cta-anim opacity-0 translate-y-8 transition-all duration-700" />
             </div>
         </div>
         <!-- Text content and button on the right -->
@@ -15,7 +15,7 @@ if (!$is_logged_in) {
                 Want to have the <span class="observe-card text-blue-600">ultimate customer experience?</span>
                 <br>Become a <span class="observe-card text-blue-600">member</span> today!
             </h2>
-            <a href="signup" class="observe-card inline-flex items-center bg-blue-500 text-white px-8 py-3 text-lg font-semibold hover:bg-blue-600 transition-colors duration-300 shadow-md member-cta-btn member-cta-anim opacity-0 translate-y-8 transition-all duration-700 relative overflow-hidden">
+            <a href="signup" class="rounded-md observe-card inline-flex items-center bg-blue-500 text-white px-8 py-3 text-lg font-semibold hover:bg-blue-600 transition-colors duration-300 shadow-md member-cta-btn member-cta-anim opacity-0 translate-y-8 transition-all duration-700 relative overflow-hidden">
                 Sign up <i class="bi bi-chevron-right ml-2"></i>
                 <span class="member-cta-pulse"></span>
             </a>
@@ -31,7 +31,7 @@ if (!$is_logged_in) {
     <div class="bg-[whitesmoke] py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-gray-700">
-                <h2 class="text-4xl font-bold mb-4 text-gray-800">Stay Updated with KT Phones</h2>
+                <h2 class="text-4xl font-bold mb-4 text-blue-400">Stay Updated with KT Phones</h2>
                 <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto text-gray-600">
                     Get exclusive offers, new product alerts, and tech tips delivered to your inbox.
                     Join thousands of satisfied customers!
@@ -39,7 +39,7 @@ if (!$is_logged_in) {
                 <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                     <input type="email" placeholder="Enter your email address"
                         class="flex-1 px-6 py-4 rounded-lg text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-white border border-gray-300">
-                    <button class="bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-4 rounded-lg transition-colors duration-300 transform hover:scale-105">
+                    <button class="rounded-md observe-card inline-flex items-center bg-blue-500 text-white px-8 py-3 text-lg font-semibold hover:bg-blue-600 transition-colors duration-300 shadow-md member-cta-btn member-cta-anim opacity-0 transition-all duration-700 relative overflow-hidden">
                         Subscribe
                     </button>
                 </div>
