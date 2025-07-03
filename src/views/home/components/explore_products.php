@@ -41,9 +41,6 @@ if (!function_exists('getProductRating')) {
     <?php endif; ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <?php foreach ($products as $product): ?>
-           
-
-
             <div class="p-4 flex flex-col group transition-all duration-300">
                 <!-- Image & Icons -->
                 <div class="relative rounded-md overflow-hidden flex items-center justify-center min-h-[220px]" style="background-image: url('./src/assets/images/frame.png'); background-size: cover; background-position: center;">

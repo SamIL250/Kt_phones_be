@@ -4,6 +4,19 @@ header('Content-Type: application/json');
 session_start();
 require_once __DIR__ . '/../../../vendor/autoload.php'; // Adjust path as needed
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo '<!DOCTYPE html>
+    <html>
+    <head><title>Method Not Allowed</title></head>
+    <body>
+        <h2>405 - Method Not Allowed</h2>
+        <p>This endpoint only accepts POST requests for placing orders.</p>
+    </body>
+    </html>';
+    exit;
+}
+
 // Collect POST data
 $post_data = $_POST;
 
@@ -73,7 +86,7 @@ $data = [
     "customizations" => [
         "title" => "KT Phones Order",
         "description" => "Payment for order $tx_ref",
-        "logo" => "https://yourdomain.com/logo.png"
+        "logo" => "https://gotallnews.com/lerony_client_f_x_y_b/kt_logo.png"
     ]
 ];
 
@@ -108,8 +121,17 @@ if (isset($body['status']) && $body['status'] === 'success') {
         'checkout' => $checkout,
         'post' => $post_data
     ];
-    // Return payment link
-    echo json_encode(['status' => 'success', 'link' => $body['data']['link']]);
+    // Redirect to payment link
+    header('Location: ' . $body['data']['link']);
+    // Fallback: If redirect fails, show HTML link
+    echo '<!DOCTYPE html>
+    <html>
+    <head><title>Redirecting to Payment...</title></head>
+    <body>
+        <p>If you are not redirected automatically, <a href="' . htmlspecialchars($body['data']['link']) . '">click here to proceed to payment</a>.</p>
+    </body>
+    </html>';
+    exit;
 } else {
     echo json_encode(['status' => 'error', 'message' => $body['message'] ?? 'Payment initialization failed']);
 }

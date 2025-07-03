@@ -2,7 +2,7 @@
     <form id="search-form" class="flex-1 mx-0 md:mx-8 max-w-full md:max-w-2xl flex items-center bg-gray-100 rounded-full border border-gray-200 px-3 sm:px-4 py-2 focus-within:ring-2 focus-within:ring-blue-400 transition mt-2 md:mt-0 order-3 md:order-none w-full md:w-auto" action="store" method="get" autocomplete="off">
         <i class="bi bi-search text-gray-400 text-lg sm:text-xl mr-2"></i>
         <input style="outline: none;" id="search-input" type="text" name="q" placeholder="Search for products, brands, categories..." class="flex-1 border-none outline-none bg-transparent text-gray-800 placeholder-gray-400 text-sm sm:text-base min-w-0" autocomplete="off" />
-        <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-5 py-2 rounded-full font-semibold shadow transition text-sm sm:text-base cursor-pointer">Search</button>
+        <!-- <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-5 py-2 rounded-full font-semibold shadow transition text-sm sm:text-base cursor-pointer">Search</button> -->
     </form>
     <div id="search-results-dropdown" class="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 hidden">
         <div id="search-loading" class="flex items-center justify-center py-6 text-blue-500 hidden">
