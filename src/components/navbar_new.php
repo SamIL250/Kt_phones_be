@@ -351,10 +351,10 @@ if (isset($conn) && $conn) {
     .desktop-search-bar,
     .desktop-search-bar > div,
     .desktop-search-bar form {
-        max-width: 400px !important;
+        max-width: 340px !important;
         width: 100% !important;
         min-width: 0 !important;
-        margin-left: auto !important;
+        margin-left: 20px !important;
         margin-right: auto !important;
         background: white !important;
         min-height: 0 !important;
@@ -366,6 +366,7 @@ if (isset($conn) && $conn) {
         height: 1.6rem !important;
         line-height: 1.6rem !important;
         min-height: 0 !important;
+        min-width: 120px !important;
         box-sizing: border-box !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
